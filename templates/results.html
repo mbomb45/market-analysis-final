@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Analysis Results</title>
+  <title>Market Analysis Results</title>
 </head>
 <body>
-    <h1>Market Analysis Results</h1>
-    <p>{{ analysis }}</p>
+  <h1>Results for {{ property_name }} in {{ location }}</h1>
+
+  <h2>Comparable Rents</h2>
+  <ul>
+    {% for unit, values in comparable_rents.items() %}
+      <li>{{ unit }}: Subject = ${{ values.subject }}, Market Avg = ${{ values.comp_avg }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Suggested Upgrades</h2>
+  <ul>
+    {% for upgrade in upgrades %}
+      <li>{{ upgrade.item }} — +${{ upgrade.rent_bump }}/month</li>
+    {% endfor %}
+  </ul>
+
+  <h2>ROI</h2>
+  <p>Total Investment: ${{ investment }}</p>
+  <p>Months to Payback: {{ months_to_payback }}</p>
+  <p>Estimated Annual ROI: {{ annual_roi }}%</p>
 </body>
 </html>
